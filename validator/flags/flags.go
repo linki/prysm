@@ -20,9 +20,9 @@ var (
 		Usage: "Beacon node RPC provider endpoint",
 		Value: "localhost:4000",
 	}
-	// CertFlag defines a flag for the node's TLS certificate.
-	CertFlag = &cli.StringFlag{
-		Name:  "tls-cert",
+	// BeaconCertFlag defines a flag for the node's TLS certificate.
+	BeaconCertFlag = &cli.StringFlag{
+		Name:  "beacon-tls-cert",
 		Usage: "Certificate for secure gRPC. Pass this and the tls-key flag in order to use gRPC securely.",
 	}
 	// SlasherRPCProviderFlag defines a slasher node RPC endpoint.

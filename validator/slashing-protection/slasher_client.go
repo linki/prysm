@@ -35,7 +35,7 @@ type Service struct {
 // Config for the validator service.
 type Config struct {
 	Endpoint                   string
-	CertFlag                   string
+	BeaconCertFlag             string
 	GrpcMaxCallRecvMsgSizeFlag int
 	GrpcRetriesFlag            uint
 	GrpcHeadersFlag            string
@@ -49,7 +49,7 @@ func NewSlashingProtectionService(ctx context.Context, cfg *Config) (*Service, e
 		ctx:                ctx,
 		cancel:             cancel,
 		endpoint:           cfg.Endpoint,
-		withCert:           cfg.CertFlag,
+		withCert:           cfg.BeaconCertFlag,
 		maxCallRecvMsgSize: cfg.GrpcMaxCallRecvMsgSizeFlag,
 		grpcRetries:        cfg.GrpcRetriesFlag,
 		grpcHeaders:        strings.Split(cfg.GrpcHeadersFlag, ","),

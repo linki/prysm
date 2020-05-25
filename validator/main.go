@@ -46,7 +46,7 @@ func startNode(ctx *cli.Context) error {
 
 var appFlags = []cli.Flag{
 	flags.BeaconRPCProviderFlag,
-	flags.CertFlag,
+	flags.BeaconCertFlag,
 	flags.GraffitiFlag,
 	flags.KeystorePathFlag,
 	flags.MergeSourceDirectories,
@@ -154,7 +154,7 @@ contract in order to activate the validator client`,
 					Flags: []cli.Flag{
 						cmd.GrpcMaxCallRecvMsgSizeFlag,
 						flags.BeaconRPCProviderFlag,
-						flags.CertFlag,
+						flags.BeaconCertFlag,
 						flags.GrpcHeadersFlag,
 						flags.GrpcRetriesFlag,
 						flags.KeyManager,
@@ -181,7 +181,7 @@ contract in order to activate the validator client`,
 						defer cancel()
 						dialOpts := client.ConstructDialOptions(
 							cliCtx.Int(cmd.GrpcMaxCallRecvMsgSizeFlag.Name),
-							cliCtx.String(flags.CertFlag.Name),
+							cliCtx.String(flags.BeaconCertFlag.Name),
 							strings.Split(cliCtx.String(flags.GrpcHeadersFlag.Name), ","),
 							cliCtx.Uint(flags.GrpcRetriesFlag.Name),
 							grpc.WithBlock())

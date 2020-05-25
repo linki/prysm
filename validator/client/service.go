@@ -56,7 +56,7 @@ type ValidatorService struct {
 type Config struct {
 	Endpoint                   string
 	DataDir                    string
-	CertFlag                   string
+	BeaconCertFlag             string
 	GraffitiFlag               string
 	KeyManager                 keymanager.KeyManager
 	LogValidatorBalances       bool
@@ -75,7 +75,7 @@ func NewValidatorService(ctx context.Context, cfg *Config) (*ValidatorService, e
 		ctx:                  ctx,
 		cancel:               cancel,
 		endpoint:             cfg.Endpoint,
-		withCert:             cfg.CertFlag,
+		withCert:             cfg.BeaconCertFlag,
 		dataDir:              cfg.DataDir,
 		graffiti:             []byte(cfg.GraffitiFlag),
 		keyManager:           cfg.KeyManager,

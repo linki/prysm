@@ -186,7 +186,7 @@ func (s *ValidatorClient) registerClientService(keyManager keymanager.KeyManager
 	dataDir := s.cliCtx.String(cmd.DataDirFlag.Name)
 	logValidatorBalances := !s.cliCtx.Bool(flags.DisablePenaltyRewardLogFlag.Name)
 	emitAccountMetrics := !s.cliCtx.Bool(flags.DisableAccountMetricsFlag.Name)
-	cert := s.cliCtx.String(flags.CertFlag.Name)
+	cert := s.cliCtx.String(flags.BeaconCertFlag.Name)
 	graffiti := s.cliCtx.String(flags.GraffitiFlag.Name)
 	maxCallRecvMsgSize := s.cliCtx.Int(cmd.GrpcMaxCallRecvMsgSizeFlag.Name)
 	grpcRetries := s.cliCtx.Uint(flags.GrpcRetriesFlag.Name)
@@ -201,7 +201,7 @@ func (s *ValidatorClient) registerClientService(keyManager keymanager.KeyManager
 		KeyManager:                 keyManager,
 		LogValidatorBalances:       logValidatorBalances,
 		EmitAccountMetrics:         emitAccountMetrics,
-		CertFlag:                   cert,
+		BeaconCertFlag:             cert,
 		GraffitiFlag:               graffiti,
 		GrpcMaxCallRecvMsgSizeFlag: maxCallRecvMsgSize,
 		GrpcRetriesFlag:            grpcRetries,
@@ -225,7 +225,7 @@ func (s *ValidatorClient) registerSlasherClientService() error {
 	grpcRetries := s.cliCtx.Uint(flags.GrpcRetriesFlag.Name)
 	sp, err := slashing_protection.NewSlashingProtectionService(context.Background(), &slashing_protection.Config{
 		Endpoint:                   endpoint,
-		CertFlag:                   cert,
+		BeaconCertFlag:             cert,
 		GrpcMaxCallRecvMsgSizeFlag: maxCallRecvMsgSize,
 		GrpcRetriesFlag:            grpcRetries,
 		GrpcHeadersFlag:            s.cliCtx.String(flags.GrpcHeadersFlag.Name),
