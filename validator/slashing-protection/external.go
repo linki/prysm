@@ -39,6 +39,7 @@ func (s *Service) VerifyAttestation(ctx context.Context, attestation *ethpb.Inde
 	slashable, err := s.slasherClient.IsSlashableAttestationNoUpdate(ctx, attestation)
 	if err != nil {
 		log.Warnf("External slashing attestation protection returned an error: %v", err)
+		return true
 	}
 	if slashable.Slashable {
 		log.Warn("External slashing attestation protection found the attestation to be slashable")
