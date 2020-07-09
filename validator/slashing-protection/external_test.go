@@ -2,6 +2,7 @@ package slashingprotection
 
 import (
 	"context"
+	"errors"
 	"testing"
 
 	eth "github.com/prysmaticlabs/ethereumapis/eth/v1alpha1"
@@ -30,6 +31,10 @@ func TestService_VerifyAttestation(t *testing.T) {
 		t.Error("Expected verify attestation to fail verification")
 	}
 	s = &Service{slasherClient: mockSlasher.MockSlasher{SlashAttestation: false}}
+	if !s.VerifyAttestation(context.Background(), att) {
+		t.Error("Expected verify attestation to pass verification")
+	}
+	s = &Service{slasherClient: mockSlasher.MockSlasher{SlashAttestation: false, RaiseError: errors.New("error")}}
 	if !s.VerifyAttestation(context.Background(), att) {
 		t.Error("Expected verify attestation to pass verification")
 	}

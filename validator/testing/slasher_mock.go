@@ -18,6 +18,7 @@ type MockSlasher struct {
 	IsSlashableAttestationNoUpdateCalled bool
 	IsSlashableBlockCalled               bool
 	IsSlashableBlockNoUpdateCalled       bool
+	RaiseError                           error
 }
 
 // IsSlashableAttestation returns slashbale attestation if slash attestation is set to true.
@@ -37,9 +38,9 @@ func (ms MockSlasher) IsSlashableAttestation(ctx context.Context, in *eth.Indexe
 		}
 		return &slashpb.AttesterSlashingResponse{
 			AttesterSlashing: slashings,
-		}, nil
+		}, ms.RaiseError
 	}
-	return nil, nil
+	return nil, ms.RaiseError
 }
 
 // IsSlashableAttestationNoUpdate returns slashbale if slash attestation is set to true.
@@ -47,7 +48,7 @@ func (ms MockSlasher) IsSlashableAttestationNoUpdate(ctx context.Context, in *et
 	ms.IsSlashableAttestationNoUpdateCalled = true
 	return &slashpb.Slashable{
 		Slashable: ms.SlashAttestation,
-	}, nil
+	}, ms.RaiseError
 
 }
 
@@ -67,9 +68,9 @@ func (ms MockSlasher) IsSlashableBlock(ctx context.Context, in *eth.SignedBeacon
 		}
 		return &slashpb.ProposerSlashingResponse{
 			ProposerSlashing: slashings,
-		}, nil
+		}, ms.RaiseError
 	}
-	return nil, nil
+	return nil, ms.RaiseError
 }
 
 // IsSlashableBlockNoUpdate returns slashbale if slash block is set to true.
@@ -77,5 +78,5 @@ func (ms MockSlasher) IsSlashableBlockNoUpdate(ctx context.Context, in *eth.Beac
 	ms.IsSlashableBlockNoUpdateCalled = true
 	return &slashpb.Slashable{
 		Slashable: ms.SlashBlock,
-	}, nil
+	}, ms.RaiseError
 }

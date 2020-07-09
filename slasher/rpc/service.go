@@ -12,6 +12,7 @@ import (
 	recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
 	grpc_opentracing "github.com/grpc-ecosystem/go-grpc-middleware/tracing/opentracing"
 	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
+	"github.com/prysmaticlabs/prysm/bazel-prysm/external/com_github_davecgh_go_spew/spew"
 	slashpb "github.com/prysmaticlabs/prysm/proto/slashing"
 	"github.com/prysmaticlabs/prysm/shared/traceutil"
 	"github.com/prysmaticlabs/prysm/slasher/beaconclient"
@@ -97,6 +98,9 @@ func (s *Service) Start() {
 		)),
 	}
 	grpc_prometheus.EnableHandlingTimeHistogram()
+
+	spew.Dump(s)
+
 	// TODO(#791): Utilize a certificate for secure connections
 	// between beacon nodes and validator clients.
 	if s.withCert != "" && s.withKey != "" {
